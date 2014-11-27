@@ -8,6 +8,7 @@ Includes:
 * ZSPLIT - split a ZSET in two via round-robin
 * ZSPREAD - spread members between two ZSETS (random selection) 
 * SETCLAMP - clamp a value between a min and max
+* SPUBLISH - publish a message to all members of a set
 
 
 ### License
