@@ -7,6 +7,7 @@ Includes:
 * MZCARD - get multiple ZSET sizes
 * ZSPLIT - split a ZSET in two via round-robin
 * ZSPREAD - spread members between two ZSETS (random selection) 
+* SETCLAMP - clamp a value between a min and max
 
 
 ### License
