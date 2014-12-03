@@ -9,6 +9,7 @@ Includes:
 * ZSPREAD - spread members between two ZSETS (random selection) 
 * SETCLAMP - clamp a value between a min and max
 * SPUBLISH - publish a message to all members of a set
+* COPY - copy a key without knowing its type
 
 
 ### License
