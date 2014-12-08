@@ -10,6 +10,7 @@ Includes:
 * SETCLAMP - clamp a value between a min and max
 * SPUBLISH - publish a message to all members of a set
 * COPY - copy a key without knowing its type
+* ZSTDDEV - standard deviation of ZSET scores
 
 
 ### License
