@@ -1,5 +1,5 @@
 -- @desc:   Spread members between two ZSETs so they are even size
--- @usage:  redis-cli eval "$(cat ZSPREAD)" 2 <zset1> <zset2>
+-- @usage:  redis-cli eval "$(cat ZSPREAD.lua)" 2 <zset1> <zset2>
 -- @return: list of spread members
 
 local function round(num) 
@@ -19,22 +19,12 @@ local function ZSPREAD(zset1, zset2)
   local zset2size = redis.call("ZCARD", zset2)
   if zset2size == 0 then return {} end
 
-  local fromZset
-  local toZset
-  local fromZsetSize
-  local toZsetSize
+  local fromZset, fromZsetSize = zset1, zset1size
+  local toZsetSize, toZsetSize = zset2, zset2size
 
   if zset1size > zset2size then 
-    fromZset = zset1 
-    fromZsetSize = zset1size
-    toZset = zset2
-    toZsetSize = zset2size
-  elseif zset2size > zset1size then
-    fromZset = zset2 
-    fromZsetSize = zset2size
-    toZset = zset1
-    toZsetSize = zset1size
-  else
+    fromZset, fromZsetSize = toZset, toZsetSize
+  elseif zset1size == zset2size then
     return {}
   end
 
