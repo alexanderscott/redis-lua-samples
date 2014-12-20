@@ -13,4 +13,3 @@ local function SPUBLISH(key, msg)
 end
 
 return SPUBLISH(KEYS[1], ARGV[1])
-

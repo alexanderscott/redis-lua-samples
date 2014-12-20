@@ -23,4 +23,16 @@ local function ZSUM(keys)
   return sum
 end
 
+
+--[[ @TEST
+redis.call("ZADD", "test_zset1", 5, "five", 6, "six")
+redis.call("ZADD", "test_zset2", 7, "seven", 8, "eight")
+local sum = ZSUM({"test_zset1", "test_zset2"})
+assert(sum == 26)
+redis.call("DEL", "test_zset1", "test_zset2")
+
+local sumOfZero = ZSUM({"test_empty1", "test_empty2"})
+assert(sumOfZero == 0)
+--]]
+
 return ZSUM(KEYS)
