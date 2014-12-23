@@ -17,7 +17,7 @@ local function COPY(key, dest)
 end
 
 
----[[
+--[[ @TEST
 redis.call("ZADD", "test_zset1", 5, "five", 6, "six")
 COPY("test_zset1", "test_zset2")
 assert(redis.call("ZCARD", "test_zset2") == 2)
@@ -34,7 +34,7 @@ redis.call("SET", "test_str1", "five")
 COPY("test_str1", "test_str2")
 assert(redis.call("GET", "test_str2") == "five")
 redis.call("DEL", "test_str1", "test_str2")
----]]
+--]]
 
 return COPY(KEYS[1], KEYS[2])
 
