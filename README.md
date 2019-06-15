@@ -2,16 +2,19 @@
 Some useful Lua scripts for common Redis operations.
 
 Includes:
-* COPY      - copy a key without knowing its type
-* MGETSUM   - sum multiple string values
-* MEXISTS   - get multiple key existence
-* MZCARD    - get multiple ZSET sizes
-* SETCLAMP  - clamp a value between a min and max
-* SPUBLISH  - publish a message to all members of a set
-* ZMEAN     - mean of scores in a ZSET
-* ZSPLIT    - split a ZSET in two via round-robin
-* ZSPREAD   - spread members between two ZSETS (random selection) 
-* ZSTDDEV   - standard deviation of ZSET scores
+* COPY        - copy a key without knowing its type
+* EXISTSINCR  - increment a key atomically if it exists
+* INCREXPIRE  - increment a key atomically (set to 0 if not exists) and add/update key expiration
+* KEYSDEL     - find and delete all keys matching a provided pattern 
+* MGETSUM     - sum multiple string values
+* MEXISTS     - get multiple key existence
+* MZCARD      - get multiple ZSET sizes
+* SETCLAMP    - clamp a value between a min and max
+* SPUBLISH    - publish a message to all members of a set
+* ZMEAN       - mean of scores in a ZSET
+* ZSPLIT      - split a ZSET in two via round-robin
+* ZSPREAD     - spread members between two ZSETS (random selection) 
+* ZSTDDEV     - standard deviation of ZSET scores
 
 
 ### License
