@@ -2,8 +2,8 @@
 -- @usage:  redis-cli EVAL "$(cat COPY.lua)" 2 <key> <destKey>
 
 local function COPY(key, dest)
-  local keyType = redis.call("TYPE", key)
-
+  local keyType = redis.call("TYPE", key)["ok"]
+  
   if keyType == "set" then redis.call("SUNIONSTORE", dest, key)
   elseif keyType == "zset" then redis.call("ZUNIONSTORE", dest, 1, key)
   elseif keyType == "list" then redis.call("SORT", key, "BY", "NOSORT", "STORE", dest)
@@ -11,7 +11,8 @@ local function COPY(key, dest)
   elseif keyType == "hash" then
     local hash = redis.call('HGETALL', key);
     redis.call('HMSET', dest, unpack(hash));
-  --else return { err = "Key "..key.." does not exist or has unknown type"} 
+  else 
+     return { err = "Key "..key.." does not exist or has unknown type"}; 
   end
   return
 end

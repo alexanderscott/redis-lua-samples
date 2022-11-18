@@ -14,23 +14,25 @@ end
 
 local function ZSPREAD(zset1, zset2)
   local zset1size = redis.call("ZCARD", zset1)
-  if zset1size == 0 then return {} end
+  if zset1size == 0 then return {"first set was empty"} end
 
   local zset2size = redis.call("ZCARD", zset2)
-  if zset2size == 0 then return {} end
+  if zset2size == 0 then return {"second set was empty"} end
 
   local fromZset, fromZsetSize = zset1, zset1size
-  local toZsetSize, toZsetSize = zset2, zset2size
+  local toZset, toZsetSize = zset2, zset2size
 
-  if zset1size > zset2size then 
-    fromZset, fromZsetSize = toZset, toZsetSize
+  if zset1size < zset2size then 
+    fromZset, fromZsetSize = zset2, zset2size
+    toZset, toZsetSize = zset1, zset1size
   elseif zset1size == zset2size then
-    return {}
+    return {"sets are the same size, no need to spread"}
   end
 
   
-  local spreadCount = round(((fromZsetSize - toZsetSize) / 2))
-  if spreadCount == 0 then return {} end
+  local difference = fromZsetSize - toZsetSize
+  local spreadCount = round(difference / 2)
+  if difference < 2 then return {"sets are already spread-nothing to do"} end
 
   local members = redis.call("ZREVRANGEBYSCORE", zset1, "+INF", "-INF", "WITHSCORES")
 

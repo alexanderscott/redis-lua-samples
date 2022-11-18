@@ -7,10 +7,10 @@ local function SETCLAMP(key, min, max)
   if not valStr then return end
   local val = tonumber(valStr)
 
-  if val > max then
+  if val > tonumber(max) then
     redis.call("SET", key, max)
     val = max
-  elseif val < min then
+  elseif val < tonumber(min) then
     redis.call("SET", key, min)
     val = min
   end
